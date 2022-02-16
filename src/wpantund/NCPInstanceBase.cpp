@@ -2102,11 +2102,7 @@ void custom_revstr(char *str1)
 
 void 
 NCPInstanceBase::convert_to_filter_list(std::string value){
-	std::cout << "MACFILTER VALUE: " << value << "\n";
-	std::cout <<	"MACFILTER: BEFORE  \n";
-	for (int x = 0; x < MAC_FILTER_LIST_SIZE; x++){
-		std::cout << mMacFilterListString[x] << "\n";
-	}
+	// Store MAC address (16 digit hex) into two ints (32bit each)
 	int first_input_int;
 	int second_input_int;
 	if (value.substr(0,3) == "add" || value.substr(0,3) == "rem"){
@@ -2143,15 +2139,9 @@ NCPInstanceBase::convert_to_filter_list(std::string value){
 		// perform remove
 		// step 1 : find row to remove
 		int row_remove = 10;
-		std::cout << "MACFILTER COMPARISON\n";
 		for (int x = 0; x < MAC_FILTER_LIST_SIZE; x++){
-			std::cout << "First Int: " << mMacFilterList[x*2] << " | " << first_input_int;
-			std::cout << "Second int" << mMacFilterList[x*2 +1 ] << " | " << second_input_int;
 			if ((mMacFilterList[x*2] == first_input_int) && (mMacFilterList[x*2+1] == second_input_int)){
 				row_remove = x;
-				std::cout << "EQUAL \n";
-			}else {
-				std::cout << "NOT EQUAL \n";
 			}
 		}
 		if (row_remove != 10){
@@ -2177,8 +2167,4 @@ NCPInstanceBase::convert_to_filter_list(std::string value){
 		string_count ++;
 	}
 
-	std::cout <<	"MACFILTER: AFTER  \n";
-	for (int x = 0; x < MAC_FILTER_LIST_SIZE; x++){
-		std::cout << mMacFilterListString[x] << "\n";
-	}
 }
